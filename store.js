@@ -1,8 +1,14 @@
-import { createStore } from 'redux';
+import { 
+  createStore,
+  applyMiddleware
+} from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import {
+  createReactNavigationReduxMiddleware
+} from 'react-navigation-redux-helpers';
 
-import reducer from './reducers/videos';
+import reducer from './reducers/index';
 
 // Creamos el Store, le pasamos los reducres y un estado inicial (las listas)
 /* const store = createStore(reducer, {
@@ -19,15 +25,24 @@ const persistConfig = {
   key: 'root',
   storage,
   blacklist: ['selectedMovie']
-}
+};
 
 // Persistimos los reducers pasando la configuración y los reducers
-const persistedReducer = persistReducer(persistConfig, reducer)
+const persistedReducer = persistReducer(persistConfig, reducer);
 
-// Creamos el Store a partir de los reducers persistidos
-const store = createStore(persistedReducer)
+// Creamos el middleware de Navigation de nombre root que devuelve el estado de navigation(key en reducers)
+const navigationMiddleware = createReactNavigationReduxMiddleware(
+  'root',
+  state => state.navigation
+);
+
+// Creamos el Store a partir de los reducers persistidos y le pasamos el navigationMiddleware
+const store = createStore(
+  persistedReducer,
+  applyMiddleware(navigationMiddleware)
+);
 
 // Persistimos el Store
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
 export { store, persistor };
