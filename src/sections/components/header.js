@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   SafeAreaView,
   StyleSheet
@@ -9,7 +8,7 @@ import {
 
 const Header = (props) => (
   <View>
-    <SafeAreaView>
+    <SafeAreaView style={styles.statusBar}>
       <View style={styles.container}>
         <Image
           source={require('../../../assets/logo.png')}
@@ -29,6 +28,9 @@ const styles = StyleSheet.create({
     height: 26,
     resizeMode: 'contain'
   },
+  statusBar: {
+    backgroundColor: 'white',
+  },
   container: {
     flexDirection: 'row',
     padding: 20
@@ -38,6 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   }
-})
+});
 
 export default Header;

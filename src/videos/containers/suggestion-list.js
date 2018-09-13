@@ -3,6 +3,7 @@ import {
   FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 import Layout from '../components/suggestion-list-layout';
 import Empty from '../components/suggestions-empty';
@@ -41,6 +42,13 @@ class SuggestionList extends Component {
         movie: item,
       }
     });
+    
+    // Navegamos a la sugerencia seleccionada a la ruta 'Movie' con navigate de NavigationActions
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'Movie'
+      })
+    );
   }
 
   render() {
@@ -68,10 +76,13 @@ class SuggestionList extends Component {
   }
 }
 
-// Traemos la lista de sugerencias del estado y las retornamos como props
+/**
+ * Traemos la lista de categorías del estado y las retornamos como props
+ * Al hacer combine reducers nuestro state cambio
+ */
 function mapStateToProps (state) {
   return {
-    list: state.suggestionList
+    list: state.videos.suggestionList
   }
 }
 

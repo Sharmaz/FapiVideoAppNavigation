@@ -46,10 +46,13 @@ class CategoryList extends Component {
   }
 }
 
-// Traemos la lista de categorías del estado y las retornamos como props
+/**
+ * Traemos la lista de categorías del estado y las retornamos como props
+ * Al hacer combine reducers nuestro state cambio
+ */
 function mapStateToProps(state) {
   return {
-    list: state.categoryList
+    list: state.videos.categoryList
   }
 }
 

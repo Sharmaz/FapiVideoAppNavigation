@@ -14,6 +14,23 @@ class Movie extends Component {
     opacity: new Animated.Value(0),
   }
 
+  /**
+   * Configuramos el navigationOptions para agregar el botón de close a nuestro Header
+   * Quitamos Header de nuestro metodo Render
+   * Para regresarnos a la pantalla previa usamos el metodo goBack() de navigation en el onPress
+   */
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
+        <Header>
+          <Close
+            onPress={() => { navigation.goBack() }}
+          />
+        </Header>
+      )
+    }
+  }
+
   closeVideo = () => {
     // Con esta acción seteamos en false la propiedad selectedMovie
     this.props.dispatch({
@@ -45,11 +62,6 @@ class Movie extends Component {
         }}
       >
         <MovieLayout>
-          <Header>
-            <Close
-              onPress={this.closeVideo}
-            />
-          </Header>
           <Player />
           <Details {...this.props.movie}/>
         </MovieLayout>
@@ -60,7 +72,7 @@ class Movie extends Component {
 
 function mapStateToProps(state) {
   return {
-    movie: state.selectedMovie
+    movie: state.videos.selectedMovie
   }
 }
   

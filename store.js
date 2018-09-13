@@ -24,7 +24,7 @@ import reducer from './reducers/index';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['selectedMovie']
+  blacklist: ['navigation']
 };
 
 // Persistimos los reducers pasando la configuración y los reducers
