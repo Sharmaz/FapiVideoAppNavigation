@@ -3,19 +3,27 @@ import {
   Text,
   ImageBackground,
   StyleSheet,
-  Platform
+  Platform,
+  TouchableOpacity
 } from 'react-native';
 
-// Nos vamos a traer en este componente los generos (categorías)
+/**
+ * Nos vamos a traer en este componente los generos (categorías)
+ * Lo envolvemos en TouchableOpacity para hacerlo presionable
+ */
 const Category = (props) => (
-  <ImageBackground
-    style={styles.container}
-    source={{
-      uri: props.background_image
-    }}
+  <TouchableOpacity
+    onPress={props.onPress}
   >
-    <Text style={styles.genre}>{props.genres ? props.genres[0] : 'Sin categoría'}</Text>
-  </ImageBackground>
+    <ImageBackground
+      style={styles.container}
+      source={{
+        uri: props.background_image
+      }}
+    >
+      <Text style={styles.genre}>{props.genres ? props.genres[0] : 'Sin categoría'}</Text>
+    </ImageBackground>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({

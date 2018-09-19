@@ -3,6 +3,7 @@ import {
   FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 import Empty from '../components/suggestions-empty';
 import Category from '../components/category';
@@ -22,9 +23,29 @@ class CategoryList extends Component {
     // Devolvemos un componente en caso de que la lista este vacia
     <Empty text="No hay categorías"/>
   )
+  viewCategory = (item) => {
+    /**
+     * Despachamos acciones de navegación a la ruta 'Category'
+     * pasando como parametros el genero de las movies
+     */
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'Category',
+        params: {
+          genre: item.genres[0]
+        }
+      })
+    );
+  }
   renderItem = ({item}) => (
-    // Rendereamos in item de la lista en el componente Category
-    <Category {...item}/>
+    /**
+     * Rendereamos un item de la lista en el componente Category
+     * Lo volvemos presionable asignandole un evento
+     */
+    <Category 
+      {...item}
+      onPress={() => { this.viewCategory(item)}}
+    />
   )
 
   render() {

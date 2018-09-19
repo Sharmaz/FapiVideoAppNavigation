@@ -19,7 +19,7 @@ const Suggestion = (props) => (
           source={{uri: props.medium_cover_image}}
         />
         <View style={styles.genre}>
-          <Text style={styles.genreText}>{props.genres[0]}</Text>
+          <Text style={styles.genreText}>{props.genres ? props.genres[0] : 'Sin categoría'}</Text>
         </View>
       </View>
       <View style={styles.right}>
