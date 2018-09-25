@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  View,
   Text,
   SafeAreaView,
   StyleSheet,
   Button,
+  StatusBar
 } from 'react-native';
 import Icon from '../../sections/components/icon';
 
@@ -16,6 +16,19 @@ class Profile extends Component {
       tabBarIcon: <Icon icon="😎" />
     }
   }
+
+  // Cambiamos el color del contenido del StatusBar, al escuchar el evento didFocus
+  componentDidMount() {
+    this.focus = this.props.navigation.addListener('didFocus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('white');
+    });
+  }
+
+  componentWillUnmount() {
+    this.focus.remove();
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>

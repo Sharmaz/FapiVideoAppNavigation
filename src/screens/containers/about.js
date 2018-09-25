@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  StatusBar
 } from 'react-native';
 
 import Icon from '../../sections/components/icon';
@@ -16,6 +17,19 @@ class About extends Component {
       tabBarIcon: <Icon icon="📺" />
     }
   }
+
+  // Cambiamos el color del contenido del StatusBar, al escuchar el evento didFocus
+  componentDidMount() {
+    this.focus = this.props.navigation.addListener('didFocus', () => {
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#022c43');
+    });
+  }
+
+  componentWillUnmount() {
+    this.focus.remove();
+  }
+
   render() {
     return (
       <View style={styles.container}>
