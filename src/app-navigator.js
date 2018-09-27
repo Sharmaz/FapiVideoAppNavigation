@@ -20,12 +20,14 @@ import Loading from './screens/containers/loading';
 const Main = createStackNavigator(
   {
     Home,
-    Movie,
     Category
   },
   {
     navigationOptions: {
       header: Header
+    },
+    cardStyle: {
+      backgroundColor: 'white'
     }
   }
 );
@@ -64,13 +66,37 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 /**
+ * Para nuestro modal que va a hacer el componente de Movie, lo sacamos de Main y lo
+ * agregamos en WithModal, tambien pasamos todo el TabNavigator aqui, ademas seteamos
+ * configuración de modal, color de fondo y activamos los gestures en android
+ */
+const WithModal = createStackNavigator(
+  {
+    Main: {
+      screen: TabNavigator
+    },
+    Movie,
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    cardStyle: {
+      backgroundColor: 'white'
+    },
+    navigationOptions: {
+      gesturesEnabled: true
+    }
+  }
+);
+
+/**
  * Creamos el nuevo Stack con SwitchNavigator usamos una ruta para la Aplicación
  * Tambien seteamos una ruta para el Login y una para Loading
  * Seteamos como ruta inicial a Loading
  */
 const SwitchNavigator = createSwitchNavigator(
   {
-    App: TabNavigator,
+    App: WithModal,
     Login: Login,
     Loading: Loading
   },
@@ -78,6 +104,5 @@ const SwitchNavigator = createSwitchNavigator(
     initialRouteName: 'Loading',
   }
 );
-
 
 export default SwitchNavigator;

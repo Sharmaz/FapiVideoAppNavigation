@@ -4,6 +4,7 @@ import {
   StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation'
 
 import API from '../../../utils/api';
 
@@ -22,6 +23,13 @@ class Search extends Component {
         movie: movies[0]
       }
     });
+
+    // Utilizamos NavigationActions para movermos a la ruta Movie al hacer el Submit
+    this.props.dispatch(
+      NavigationActions.navigate({
+        routeName: 'Movie'
+      })
+    );
   }
 
   handleChangeText = (text) => {
