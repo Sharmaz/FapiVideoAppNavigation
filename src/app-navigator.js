@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from 'react-navigation';
 
 import Home from './screens/containers/home';
@@ -12,6 +13,8 @@ import About from './screens/containers/about';
 import Lucky from './screens/containers/lucky';
 import Profile from './screens/containers/profile';
 import Icon from './sections/components/icon';
+import Login from './screens/containers/login';
+import Loading from './screens/containers/loading';
 
 // Main es nuestro StackNavigator
 const Main = createStackNavigator(
@@ -60,4 +63,21 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-export default TabNavigator;
+/**
+ * Creamos el nuevo Stack con SwitchNavigator usamos una ruta para la Aplicación
+ * Tambien seteamos una ruta para el Login y una para Loading
+ * Seteamos como ruta inicial a Loading
+ */
+const SwitchNavigator = createSwitchNavigator(
+  {
+    App: TabNavigator,
+    Login: Login,
+    Loading: Loading
+  },
+  {
+    initialRouteName: 'Loading',
+  }
+);
+
+
+export default SwitchNavigator;
