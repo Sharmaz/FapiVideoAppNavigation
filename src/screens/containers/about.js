@@ -14,7 +14,8 @@ class About extends Component {
   static navigationOptions = () => {
     return {
       title: "Acerca de",
-      tabBarIcon: <Icon icon="📺" />
+      tabBarIcon: <Icon icon="📺" />,
+      drawerIcon: <Icon icon="📺" />
     }
   }
 

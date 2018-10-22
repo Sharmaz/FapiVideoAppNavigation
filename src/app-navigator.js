@@ -2,7 +2,8 @@ import React from 'react';
 import { 
   createStackNavigator,
   createBottomTabNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createDrawerNavigator
 } from 'react-navigation';
 
 import Home from './screens/containers/home';
@@ -15,6 +16,7 @@ import Profile from './screens/containers/profile';
 import Icon from './sections/components/icon';
 import Login from './screens/containers/login';
 import Loading from './screens/containers/loading';
+import DrawerComponent from './sections/components/drawer';
 
 // Main es nuestro StackNavigator
 const Main = createStackNavigator(
@@ -44,7 +46,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: Main,
       navigationOptions: {
         title: 'Inicio',
-        tabBarIcon: <Icon icon="🏠"/>
+        tabBarIcon: <Icon icon="🏠"/>,
       }
     },
     About: {
@@ -90,13 +92,54 @@ const WithModal = createStackNavigator(
 );
 
 /**
+ * Creamos DrawerNavigator
+ */
+
+ const DrawerNavigator = createDrawerNavigator(
+   {
+     Main: {
+       screen: WithModal,
+       navigationOptions: {
+        title: 'Inicio',
+        drawerIcon: <Icon icon="🏠"/>
+       }
+     },
+     Acerca: {
+       screen: About
+     },
+     Suerte: Lucky
+   },
+   {
+    drawerWidth: 200,
+    drawerBackgroundColor: '#f6f6f6',
+    contentComponent: DrawerComponent,
+    contentOptions: {
+      activeBackgroundColor: '#E82943',
+      activeTintColor: 'white',
+      inactiveBackgroundColor: 'white',
+      inactiveTintColor: '#828282',
+      itemStyle: {
+        borderBottomWidth: .5,
+        borderBottomColor: 'rgba(0,0,0,.5)'
+      },
+      labelStyle: {
+        marginHorizontal: 5
+      },
+      iconContainerStyle: {
+        marginHorizontal: 5
+      }
+    }
+   }
+ );
+
+/**
  * Creamos el nuevo Stack con SwitchNavigator usamos una ruta para la Aplicación
  * Tambien seteamos una ruta para el Login y una para Loading
  * Seteamos como ruta inicial a Loading
  */
 const SwitchNavigator = createSwitchNavigator(
   {
-    App: WithModal,
+    App: DrawerNavigator,
     Login: Login,
     Loading: Loading
   },
